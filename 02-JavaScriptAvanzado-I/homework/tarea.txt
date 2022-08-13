@@ -1,0 +1,121 @@
+CONTEXTO GLOBAL
+CREATION PHASE
+	x: undef
+	a: undef
+	b: undef
+	c: undef
+EXECUTE PHASE
+	X= 1
+	a= 5
+	b= 10
+	c= funcion(){}
+	CONTEXTO FUNCION C 
+		CREACTION PHASE
+			a: undef
+			b: undef
+			c: undef
+			x: undef
+			f: undef
+			f(){}
+		EXECUTE PHASE
+			a=8
+			b=9
+			c=10
+------------>imprime x: 10
+------------>imprime a: 8
+			CONTEXTO FUNCION F
+				CREACION PHASE
+				a: undef
+				b: undef
+				c: undef
+				EXECUTE PHASE
+				b=a -> b=8
+---------------->imprime b: 8
+				b=c -> b=10
+				x= 5
+				FINALIZA CONTEXTO F --> SE DESTRUYE
+		<-- se regresa al contexto de ejecution de la funcion c, se ejecuta la siguiente linea del codigo.
+-------->imprime b: 9
+		FINALIZA OONTEXTO C ----> SE DESTRUYE
+		<-- regresa al contexto global
+-------->imprime b: 10
+-------->imprime x: 1
+-------------------RESULTADO-------------------
+10
+8
+8
+9
+10
+1
+-------------------------------------------------------------
+CONTEXTO GLOBAL
+CREACION PHASE
+	foo(){}
+	bar: undef
+	baz: undef
+EXECUTE PHASE
+---->imprime bar: undefined
+	error la baz no esta definida
+-------------------------------------------------------------
+CONTEXTO GLOBAL
+CREACION PHASE
+	instructor = Tony
+EXECUTE PHASE
+	ejecuta un bloque de codigo
+	cuando no se da un valor a un booleano el sistema lo toma como true por lo tanto:
+---->imprime: Franco
+-------------------------------------------------------------
+CONTEXTO GLOBAL
+CREACION PHASE
+	instructor: undef
+	funcion(){}
+EXECUTE PHASE
+---->imprime: Tony
+	CONTEXTO FUNCION
+	CREACTION PHASE
+		var: undef
+	EXECUTE PHASE
+-------->imprime: Franco
+	-----> Se destruye cntexto de la funcion
+	<----- se regresa al contexto global
+---->imprime: Tony
+-------------------------------------------------------------
+CONTEXTO GLOBAL
+CREACION PHASE
+	instructo: undef
+	pm: undef
+EXECUTE PHASE
+	instructor= Tony
+	pm= Franco
+	---se reasigna la variable instructor: The Flash
+	---se reasigna la variable pm: Reverse Flash
+----->imprime: The Flash
+----->imprime: Reverse Flash
+	---> finaliza bloque de codigo y se destuye
+	<----regresa al contexto global
+------->imprime: The Flash
+------->imprime: Franco. //la variable pm no se queda con el valor "Reverse Flash", debido a que fue declarada con let en el contexto global
+------------------------------------------------------------
+HOISTING
+CONTEXTO GLOBAL
+CREACION PHASE
+	funcion(){}
+EXECUTE PHASE
+	CONTEXTO FUNCION TEST
+	CREACION PHASE
+		a: undef
+		foo(){}
+	EXECUTE PHASE
+-------->imprime a: undef
+		CONTEXTO FUNCION FOO
+		CREACION PHASE
+			a: undef
+		EXECUTE PHASE
+			devuelve 2
+		---> finaliza context
+	<--- regresa al contexto FUNCION TEST
+-------> imprime foo(): 2
+----------------RESULTADO---------------------
+undefined
+2
+

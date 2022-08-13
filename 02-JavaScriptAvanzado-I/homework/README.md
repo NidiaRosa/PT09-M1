@@ -6,32 +6,34 @@
 Determiná que será impreso en la consola, sin ejecutar el código.
 
 > Investiga cuál es la diferencia entre declarar una variable con `var` y directamente asignarle un valor.
+//La variable declarada con VAR, se limita a ser utilizada en el contexto en el que se encuentre, mientras que las variables sin declarar se puede utilizar en el contexto global.
+// las variables con VAR son declaradas y sin VAR significa que un valor es asignado.
 
 ```javascript
 x = 1;
 var a = 5;
 var b = 10;
-var c = function(a, b, c) {
+var c = function(a, b, c) { //8,9,10
   var x = 10;
-  console.log(x);
-  console.log(a);
-  var f = function(a, b, c) {
-    b = a;
-    console.log(b);
-    b = c;
+  console.log(x); // x=10
+  console.log(a); // a=8 
+  var f = function(a, b, c) { //8, 9, 10
+    b = a; //b=8
+    console.log(b); // b= 8
+    b = c; //b=10
     var x = 5;
   }
-  f(a,b,c);
-  console.log(b);
+  f(a,b,c); // 8,9,10
+  console.log(b); // b=9
 }
 c(8,9,10);
-console.log(b);
-console.log(x);
+console.log(b); //10
+console.log(x); //1
 ```
 
 ```javascript
-console.log(bar);
-console.log(baz);
+console.log(bar); //-----> undefined
+console.log(baz); //-----> error la varible es asignada más no declarada
 foo();
 function foo() { console.log('Hola!'); }
 var bar = 1;
@@ -48,14 +50,14 @@ console.log(instructor);
 
 ```javascript
 var instructor = "Tony";
-console.log(instructor);
+console.log(instructor); //instructor= Tony
 (function() {
    if(true) {
       var instructor = "Franco";
-      console.log(instructor);
+      console.log(instructor); //instructor= Franco
    }
 })();
-console.log(instructor);
+console.log(instructor); //instructor= Tony
 ```
 
 ```javascript
@@ -64,33 +66,33 @@ let pm = "Franco";
 if (true) {
     var instructor = "The Flash";
     let pm = "Reverse Flash";
-    console.log(instructor);
-    console.log(pm);
+    console.log(instructor); //instructor=The Flash
+    console.log(pm); //pm=Reverse Flash
 }
-console.log(instructor);
-console.log(pm);
+console.log(instructor); // instructor=The Flash
+console.log(pm); //pm=Franco
 ```
 ### Coerción de Datos
 
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
-6 / "3"
-"2" * "3"
-4 + 5 + "px"
-"$" + 4 + 5
-"4" - 2
-"4px" - 2
-7 / 0
-{}[0]
-parseInt("09")
-5 && 2
-2 && 5
-5 || 0
-0 || 5
-[3]+[3]-[10]
-3>2>1
-[] == ![]
+6 / "3" --------> 2
+"2" * "3" ------> 6
+4 + 5 + "px" ---> 9px
+"$" + 4 + 5 ----> $45
+"4" - 2 --------> 2
+"4px" - 2 ------> NaN
+7 / 0 ----------> infinity
+{}[0] ----------> undefined
+parseInt("09") -> 9
+5 && 2 ---------> 2 
+2 && 5 ---------> 5
+5 || 0 ---------> 5
+0 || 5 ---------> 5
+[3]+[3]-[10] ---> 33 -10 ---> 23
+3>2>1 ----------> 3>2 verdader --- verdadero > 1(false) ---- false 
+[] == ![] ------> true
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -102,8 +104,8 @@ parseInt("09")
 
 ```javascript
 function test() {
-   console.log(a);
-   console.log(foo());
+   console.log(a); //a= undefined
+   console.log(foo()); //2
 
    var a = 1;
    function foo() {
@@ -127,7 +129,7 @@ function getFood(food) {
     return snack;
 }
 
-getFood(false);
+getFood(false); //snack toma el valor del Meow Mix, ya que al finalizar la funcion esta se destreuye y no hay cambios en las variables
 ```
 
 
