@@ -9,6 +9,7 @@ Determiná que será impreso en la consola, sin ejecutar el código.
 //La variable declarada con VAR, se limita a ser utilizada en el contexto en el que se encuentre, mientras que las variables sin declarar se puede utilizar en el contexto global.
 // las variables con VAR son declaradas y sin VAR significa que un valor es asignado.
 
+
 ```javascript
 x = 1;
 var a = 5;
@@ -27,8 +28,13 @@ var c = function(a, b, c) { //8,9,10
   console.log(b); // b=9
 }
 c(8,9,10);
+<<<<<<< HEAD
 console.log(b); //10
 console.log(x); //1
+=======
+console.log(b); 
+console.log(x); 
+>>>>>>> c171f33454a9f8f47cf5b1a6353973b522be2c2d
 ```
 
 ```javascript
