@@ -1,16 +1,8 @@
-var fullname = 'Juan Perez';
-var obj = {
-   fullname: 'Natalia Nerea',
-   prop: {
-      fullname: 'Aurelio De Rosa',
-      getFullname: function() {
-         return this.fullname;
-      }
-   }
-};
+function printing() {
+   console.log(1); //1
+   setTimeout(function() { console.log(2); }, 1000); //4
+   setTimeout(function() { console.log(3); }, 0); //3
+   console.log(4); //2
+}
 
-console.log(obj.prop.getFullname());
-
-var test = obj.prop.getFullname;
-
-console.log(test());
+printing();

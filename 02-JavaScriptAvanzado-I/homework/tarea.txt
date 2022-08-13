@@ -118,4 +118,46 @@ EXECUTE PHASE
 ----------------RESULTADO---------------------
 undefined
 2
+----------------------------T H I S-------------------------------
+//GLOBAL CONTEX
+//CREATION PHASE
+	fullname: undef
+	obj: {}
+	test: undef
+//EXECUTE PHASE
+	fullname= Juan Perez
+	//CONTEXTO obj
+		//CREACION PHASE
+			fullname: undef
+			prop {}
+		//EXECUTE PHASE
+			fullname=Natalia Nerea
+			//CONTEXTO prop
+				//CREACION PHASE
+					fulname: undef
+					getFullname:
+				//EXECUTE PHASE
+					fullname= Aurelio De Rosa
+					getFullname= funtion()
+					//CONTEXTO funcion()
+					//CREACION PHASE
+						------
+					//EXECUTE PHASE
+						retorna ---> fullname=Aurelio De Rosa
+		<--------- REGRESA getFullname=Aurelio De Rosa
+---->imprime:Aurelio De Rosa
+---->test= undef ------> ya que no esta definida getFullname en el contexto global
+------------------E V E N T---L O O P-------------------------
+//CALL STACK          		//WEB APIS
+							//3.setTimeout(function() { console.log(2); }, 1000);	
+							//4.setTimeout(function() { console.log(3); }, 0);
 
+//12.setTimeout(function() { console.log(2); }, 1000); -13.Se borra
+//10.setTimeout(function() { console.log(3); }, 0); -11.Se borra
+//5.console.log(4); -7.Se borra
+//2.console.log(1); -8.Se borra
+//1.printing(); 	-9.Se borra
+
+//CALL BACK QUEUE
+//5.setTimeout(function() { console.log(3); }, 0);
+//6.setTimeout(function() { console.log(2); }, 1000);
