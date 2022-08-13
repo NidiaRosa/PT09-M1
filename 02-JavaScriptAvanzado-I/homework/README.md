@@ -6,9 +6,7 @@
 Determiná que será impreso en la consola, sin ejecutar el código.
 
 > Investiga cuál es la diferencia entre declarar una variable con `var` y directamente asignarle un valor.
-//La palabra resevada VAR, se utilizada para declarar variables y cuando solo se da el nombre de la variable y el valor, se esta signando.
-// Var variable = valor -> declaración y asignación.
-// variables = valor -> asignación de valor.
+
 
 ```javascript
 x = 1;
