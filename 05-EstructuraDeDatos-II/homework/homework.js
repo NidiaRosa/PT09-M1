@@ -1,5 +1,7 @@
 "use strict";
 
+const { add, remove } = require("@11ty/eleventy/src/TemplateCache");
+
 /*
 Implementar la clase LinkedList, definiendo los siguientes métodos:
   - add: agrega un nuevo nodo al final de la lista;
@@ -11,9 +13,73 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
 
-function LinkedList() {}
+class LinkedList{
+  constructor(){
+    this.head = null;
+  }
 
-function Node(value) {}
+  add(data){
+    let node = new Node(data);
+    let current = this.head;
+    // si esta vacia
+    if (!current){
+      this.head = node;
+      return node;
+    }
+    //si no esta vacio
+    while(current.next){
+      current = current.next;
+    }
+    current.next = node;
+    return node;
+  }
+  
+  remove(){
+    if(!this.head){
+      return null;
+    }
+    if(this.head && !this.head.next){
+      let rmNode = this.head;
+      this.head = null;
+      return rmNode.value;
+    }
+
+    let current = this.head;
+    while(current.next.next){
+      current = current.next;
+    }
+    let rmNode = current.next;
+    current.next = null;
+    return rmNode.value;
+  }
+
+  search(value){
+    if(!this.head){
+      return null;
+    }
+    let current = this.head;
+    while(current){
+      if(current.value == value){
+        return current.value;
+      }
+      else if(typeof value === 'function'){
+        if(value(current.value)){
+          return current.value;
+        }
+      }
+      current = current.next;
+    }
+    return null;
+  }  
+}
+
+class Node{
+  constructor(data){
+    this.value = data;
+    this.next = null;
+  }
+}
+
 
 /*
 Implementar la clase HashTable.
@@ -30,7 +96,37 @@ La clase debe tener los siguientes métodos:
 Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
 */
 
-function HashTable() {}
+function HashTable() {
+  this.numBuckets = 35;
+  this.buckets = [];
+}
+
+HashTable.prototype.hash = function(key){
+  let sum = 0;
+  for (let i = 0; i < key.length; i++){
+    sum += key.charCodeAt(i);
+  }
+  return sum % this.numBuckets;
+};
+
+HashTable.prototype.set = function(key, value){
+  if (typeof key !== 'string') throw new TypeError ('Keys must be strings'); // verifica que sea string
+  let i = this.hash(key);
+  if (this.buckets[i] === undefined) { //verrifica si existe
+    this.buckets[i] ={};  //asigan valor a la posición
+  }
+  this.buckets[i][key] = value; //agrega otro objeto a la posicion si este ya tiene algun elemento
+};
+
+HashTable.prototype.get = function(key){
+  let i = this.hash(key);
+  return this.buckets[i][key];
+};
+
+HashTable.prototype.hasKey = function(key){
+  let i = this.hash(key);
+  return this.buckets[i].hasOwnProperty(key);
+};
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
