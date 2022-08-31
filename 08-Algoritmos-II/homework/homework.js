@@ -35,6 +35,7 @@ function mergeSort(array) {
   return merge(mergeSort(left),mergeSort(array));
 }
 
+
 function merge(left, right) {
   let arr = []
   while (left.length && right.length) {
